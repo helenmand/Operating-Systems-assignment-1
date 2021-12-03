@@ -15,18 +15,18 @@ while IFS= read -r line; do
                 echo "$new" > $FILE.txt
             fi
         else
-            echo "Failed" > $FILE.txt
             echo "$line" FAILED
+            echo "Failed" > $FILE.txt
             continue
         fi
         
     else
         if curl -sL --fail $line -o /dev/null; then
-            curl -sL "$line" | md5sum | cut -d ' ' -f 1 > $FILE.txt
             echo "$line" INIT
+            curl -sL "$line" | md5sum | cut -d ' ' -f 1 > $FILE.txt
         else
-            echo Failed > $FILE.txt
             echo "$line" FAILED
+            echo Failed > $FILE.txt
             continue
         fi
 

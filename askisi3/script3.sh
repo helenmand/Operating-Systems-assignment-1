@@ -28,8 +28,6 @@ while IFS= read -r line; do
 
     if [[ "$flag" == "true" ]]; then
     	
-    	
-    	
         tmp_line=$(echo $line | sed "s/'[[A-Za-z]]/'/g" |  sed "s/'[[A-Za-z]]/  /g" | sed "s/[[:punct:]]/ /g" | tr '[:upper:]' '[:lower:]')   							 
         
         for word in $tmp_line; do
