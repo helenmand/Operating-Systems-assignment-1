@@ -1,8 +1,6 @@
 #!/bin/bash
 
-
-if [[ $1 == "-h" || $1 == "--help" ]]
-then
+if [[ $1 == "-h" || $1 == "--help" ]]; then
 	echo "This script is here to count words in GUTENBERG EBOOK's format"
 	echo "The first argument must be a txt of the ebook and,"
 	echo "the second is the number of the most frequent words in the provided txt."
@@ -10,19 +8,18 @@ then
 	exit 0
 fi
 
-
 declare -A words
 filename=$1
-flag=false
+flag="false"
 
 while IFS= read -r line; do
     if [[ "$line" == "*** START OF THIS PROJECT GUTENBERG EBOOK"* ]]; then
-        flag=true
+        flag="true"
         continue
     fi
     
     if [[ "$line" == "*** END OF THIS PROJECT GUTENBERG EBOOK"* ]]; then
-        flag=false
+        flag="false"
         break
     fi
 
@@ -46,5 +43,7 @@ done<"$filename"
 
 for word in ${!words[@]}
 do
+    # printing 
     echo $word ${words[$word]}
+
 done | sort -rn -k2 | head -$2
