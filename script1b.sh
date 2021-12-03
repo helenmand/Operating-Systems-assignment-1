@@ -39,3 +39,4 @@ while IFS= read -r line; do
     checker $line &
 
 done<$filename 
+wait
